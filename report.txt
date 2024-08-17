@@ -1,0 +1,83 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 36 files
+Detected 43 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: ./decode_image.py
+--------------------------------------------------------------------------------
+./decode_image.py:32:12: WARNING: tf.saved_model.loader.load requires manual check. tf.saved_model.load works differently in 2.0 compared to 1.0. See migration information in the documentation of tf.compat.v1.saved_model.load.
+The calls have been converted to compat.v1.
+--------------------------------------------------------------------------------
+File: ./detector.py
+--------------------------------------------------------------------------------
+./detector.py:56:25: WARNING: tf.saved_model.loader.load requires manual check. tf.saved_model.load works differently in 2.0 compared to 1.0. See migration information in the documentation of tf.compat.v1.saved_model.load.
+The calls have been converted to compat.v1.
+./detector.py:66:24: WARNING: tf.saved_model.loader.load requires manual check. tf.saved_model.load works differently in 2.0 compared to 1.0. See migration information in the documentation of tf.compat.v1.saved_model.load.
+The calls have been converted to compat.v1.
+--------------------------------------------------------------------------------
+File: ./encode_image.py
+--------------------------------------------------------------------------------
+./encode_image.py:34:12: WARNING: tf.saved_model.loader.load requires manual check. tf.saved_model.load works differently in 2.0 compared to 1.0. See migration information in the documentation of tf.compat.v1.saved_model.load.
+The calls have been converted to compat.v1.
+./encode_image.py:86:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./encode_image.py:89:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./models.py
+--------------------------------------------------------------------------------
+./models.py:197:19: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:197:19: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:198:18: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:198:18: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:203:15: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:203:15: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:209:24: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:209:24: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:210:25: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:210:25: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:212:15: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:212:15: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:214:24: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:214:24: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:215:25: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:215:25: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:219:15: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:219:15: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:221:24: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:221:24: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:222:25: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:222:25: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:225:15: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:225:15: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./models.py:227:24: WARNING: tf.contrib.image.transform requires manual check. (Manual edit required) `tf.contrib.image.transform` has been migrated to `tfa.image.transform` in TensorFlow Addons. The API spec may have changed during the migration. Please see https://github.com/tensorflow/addons for more info.
+./models.py:227:24: ERROR: Using member tf.contrib.image.transform in deprecated module tf.contrib. tf.contrib.image.transform cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+--------------------------------------------------------------------------------
+File: ./train.py
+--------------------------------------------------------------------------------
+./train.py:208:28: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./lpips\PerceptualSimilarity\train.py
+--------------------------------------------------------------------------------
+./lpips\PerceptualSimilarity\train.py:85:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./lpips\PerceptualSimilarity\train.py:90:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./lpips\PerceptualSimilarity\train.py:91:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./lpips\PerceptualSimilarity\models\base_model.py
+--------------------------------------------------------------------------------
+./lpips\PerceptualSimilarity\models\base_model.py:42:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./lpips\PerceptualSimilarity\models\base_model.py:59:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./lpips\PerceptualSimilarity\util\html.py
+--------------------------------------------------------------------------------
+./lpips\PerceptualSimilarity\util\html.py:66:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./lpips\PerceptualSimilarity\util\util.py
+--------------------------------------------------------------------------------
+./lpips\PerceptualSimilarity\util\util.py:192:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./lpips\PerceptualSimilarity\util\visualizer.py
+--------------------------------------------------------------------------------
+./lpips\PerceptualSimilarity\util\visualizer.py:91:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./lpips\PerceptualSimilarity\util\visualizer.py:114:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./lpips\PerceptualSimilarity\util\visualizer.py:115:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+================================================================================
