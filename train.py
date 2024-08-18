@@ -7,6 +7,7 @@ import tensorflow as tf
 import utils
 import models
 from os.path import join
+import time
 
 TRAIN_PATH = './data/'
 LOGS_Path = "./logs/"
@@ -87,8 +88,8 @@ def main():
     parser.add_argument('--jpeg_quality_ramp', type=float, default=1000)
     parser.add_argument('--no_im_loss_steps', help="Train without image loss for first x steps", type=int, default=500)
     parser.add_argument('--pretrained', type=str, default=None)
-    parser.add_argument('--height', type=str, default=None)
-    parser.add_argument('--width', type=str, default=None)
+    parser.add_argument('--height', type=int, default=400)
+    parser.add_argument('--width', type=int, default=400)
     args = parser.parse_args()
 
     EXP_NAME = args.exp_name
@@ -163,9 +164,13 @@ def main():
 
     total_steps = len(files_list) // args.batch_size + 1
     global_step = 0
+    
+    start_time = time.time()
 
     while global_step < args.num_steps:
         for _ in range(min(total_steps, args.num_steps - global_step)):
+            step_start_time = time.time()
+    
             no_im_loss = global_step < args.no_im_loss_steps
             images, secrets = get_img_batch(files_list=files_list,
                                             secret_size=args.secret_size,
@@ -180,25 +185,34 @@ def main():
             if global_step > args.l2_edge_delay:
                 l2_edge_gain = min(args.l2_edge_gain * (global_step - args.l2_edge_delay) / args.l2_edge_ramp,
                                    args.l2_edge_gain)
-
+    
             rnd_tran = min(args.rnd_trans * global_step / args.rnd_trans_ramp, args.rnd_trans)
             rnd_tran = np.random.uniform() * rnd_tran
             M = utils.get_rand_transform_matrix(width, np.floor(width * rnd_tran), args.batch_size)
-
+    
             feed_dict = {secret_pl: secrets,
                          image_pl: images,
                          M_pl: M,
                          l2_edge_gain_pl: [l2_edge_gain],
                          loss_scales_pl: [l2_loss_scale, lpips_loss_scale, secret_loss_scale, G_loss_scale],
                          yuv_scales_pl: [args.y_scale, args.u_scale, args.v_scale], }
-
+    
             if no_im_loss:
                 _, _, global_step = sess.run([train_secret_op, loss_op, global_step_tensor], feed_dict)
             else:
                 _, _, global_step = sess.run([train_op, loss_op, global_step_tensor], feed_dict)
                 if not args.no_gan:
                     sess.run([train_dis_op, clip_D], feed_dict)
-
+    
+            # Calculate time for the step
+            step_time = time.time() - step_start_time
+            total_time_elapsed = time.time() - start_time
+            steps_remaining = args.num_steps - global_step
+            eta_seconds = (total_time_elapsed / global_step) * steps_remaining if global_step > 0 else 0
+            eta = timedelta(seconds=int(eta_seconds))
+    
+            print(f"Step: {global_step}, Time per Step: {step_time:.2f} seconds, ETA: {eta}")
+    
             if global_step % 100 == 0:
                 summary, global_step = sess.run([summary_op, global_step_tensor], feed_dict)
                 writer.add_summary(summary, global_step)
@@ -215,15 +229,15 @@ def main():
                            tf.compat.v1.Summary.Value(tag='loss_scales/G_loss_scale', simple_value=G_loss_scale),
                            tf.compat.v1.Summary.Value(tag='loss_scales/L2_edge_gain', simple_value=l2_edge_gain), ])
                 writer.add_summary(summary, global_step)
-
+    
             if global_step % 100 == 0:
                 summary, global_step = sess.run([image_summary_op, global_step_tensor], feed_dict)
                 writer.add_summary(summary, global_step)
-
+    
             if global_step % 10000 == 0:
                 save_path = saver.save(sess, join(CHECKPOINTS_PATH, EXP_NAME, EXP_NAME + ".chkp"),
                                        global_step=global_step)
-
+    
     constant_graph_def = tf.compat.v1.graph_util.convert_variables_to_constants(
         sess,
         sess.graph.as_graph_def(),
@@ -235,7 +249,6 @@ def main():
                                              inputs={'secret': secret_pl, 'image': image_pl},
                                              outputs={'stegastamp': deploy_hide_image_op, 'residual': residual_op,
                                                       'decoded': deploy_decoder_op})
-
     writer.close()
 
 
