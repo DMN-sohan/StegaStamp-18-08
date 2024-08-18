@@ -130,8 +130,8 @@ def main():
         loss_scales=loss_scales_pl,
         yuv_scales=yuv_scales_pl,
         args=args,
-        global_step=global_step_tensor
-        height=args.height
+        global_step=global_step_tensor,
+        height=args.height,
         width=args.width)
 
     tvars = tf.compat.v1.trainable_variables()  # returns all variables created(the two variable scopes) and makes trainable true
