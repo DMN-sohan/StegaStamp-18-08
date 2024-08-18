@@ -93,7 +93,7 @@ def main():
 
     EXP_NAME = args.exp_name
 
-    files_list = glob.glob(join(TRAIN_PATH, ""))
+    files_list = glob.glob(f'{TRAIN_PATH}/images*/images/*/*.jpg')
 
     config = tf.compat.v1.ConfigProto()
     config.gpu_options.allow_growth = True
