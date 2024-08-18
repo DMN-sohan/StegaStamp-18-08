@@ -118,7 +118,7 @@ class Discriminator(Layer):
             output = tf.reduce_mean(input_tensor=x)
             return output, x
 
-def transform_net(encoded_image, args, global_step):
+def transform_net(encoded_image, args, global_step, height, width):
     sh = tf.shape(input=encoded_image)
 
     ramp_fn = lambda ramp : tf.minimum(tf.cast(global_step, dtype=tf.float32) / ramp, 1.)
@@ -158,7 +158,7 @@ def transform_net(encoded_image, args, global_step):
     encoded_image_lum = tf.expand_dims(tf.reduce_sum(input_tensor=encoded_image * tf.constant([.3,.6,.1]), axis=3), 3)
     encoded_image = (1 - rnd_sat) * encoded_image + rnd_sat * encoded_image_lum
 
-    encoded_image = tf.reshape(encoded_image, [-1,400,400,3])
+    encoded_image = tf.reshape(encoded_image, [-1,height,width,3])
     if not args.no_jpeg:
         encoded_image = utils.jpeg_compress_decompress(encoded_image, rounding=utils.round_only_at_0, factor=jpeg_factor, downsample_c=True)
 
@@ -195,7 +195,9 @@ def build_model(encoder,
                 loss_scales,
                 yuv_scales,
                 args,
-                global_step):
+                global_step,
+                height,
+                width):
 
     input_warped = tfa.image.transform(image_input, M[:,1,:], interpolation='BILINEAR')
     mask_warped = tfa.image.transform(tf.ones_like(input_warped), M[:,1,:], interpolation='BILINEAR')
@@ -237,7 +239,7 @@ def build_model(encoder,
         D_output_real, _ = discriminator(input_warped)
         D_output_fake, D_heatmap = discriminator(encoded_warped)
 
-    transformed_image, transform_summaries = transform_net(encoded_image, args, global_step)
+    transformed_image, transform_summaries = transform_net(encoded_image, args, global_step, height, width)
 
     decoded_secret = decoder(transformed_image)
 

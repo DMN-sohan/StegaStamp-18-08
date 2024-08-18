@@ -45,7 +45,7 @@ def main():
     import argparse
     import time
     print(tf.test.is_gpu_available())
-    start = time.time()
+
     parser = argparse.ArgumentParser()
     parser.add_argument('exp_name', type=str)
     parser.add_argument('--secret_size', type=int, default=20)
@@ -87,6 +87,8 @@ def main():
     parser.add_argument('--jpeg_quality_ramp', type=float, default=1000)
     parser.add_argument('--no_im_loss_steps', help="Train without image loss for first x steps", type=int, default=500)
     parser.add_argument('--pretrained', type=str, default=None)
+    parser.add_argument('--height', type=str, default=None)
+    parser.add_argument('--width', type=str, default=None)
     args = parser.parse_args()
 
     EXP_NAME = args.exp_name
@@ -97,8 +99,8 @@ def main():
     config.gpu_options.allow_growth = True
     sess = tf.compat.v1.Session(config=config)
 
-    height = 400
-    width = 400
+    height = args.height
+    width = args.width
 
     tf.compat.v1.disable_eager_execution()
 
@@ -127,7 +129,9 @@ def main():
         loss_scales=loss_scales_pl,
         yuv_scales=yuv_scales_pl,
         args=args,
-        global_step=global_step_tensor)
+        global_step=global_step_tensor
+        height=args.height
+        width=args.width)
 
     tvars = tf.compat.v1.trainable_variables()  # returns all variables created(the two variable scopes) and makes trainable true
 
@@ -233,9 +237,7 @@ def main():
                                                       'decoded': deploy_decoder_op})
 
     writer.close()
-    done = time.time()
-    print('TIME ELAPSED')
-    print(done - start)
+
 
 
 if __name__ == "__main__":

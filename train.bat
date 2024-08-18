@@ -21,3 +21,5 @@ python train.py %EXP_NAME% ^
 --l2_edge_gain 10 ^
 --l2_edge_ramp 10000 ^
 --l2_edge_delay 80000
+--height 
+--width
