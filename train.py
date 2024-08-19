@@ -1,3 +1,4 @@
+%%writefile train.py
 import glob
 import os
 from PIL import Image, ImageOps
@@ -8,8 +9,10 @@ import utils
 import models
 from os.path import join
 import time
+from datetime import datetime, timedelta
 
-TRAIN_PATH = '/kaggle/input/mirflickr-1m/'
+
+TRAIN_PATH = '/kaggle/input/mirflickr-1m'
 LOGS_Path = "./logs/"
 CHECKPOINTS_PATH = 'checkpoints/'
 SAVED_MODELS = './new_models/'
