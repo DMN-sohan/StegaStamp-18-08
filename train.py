@@ -1,4 +1,4 @@
-%%writefile train.py
+
 import glob
 import os
 from PIL import Image, ImageOps
